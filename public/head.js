@@ -72,6 +72,21 @@ async function loadPosts() {
     }
     for (const entry of entries) {
       const article = document.createElement('article');
+      if (entry.username) {
+        const username = document.createElement('p');
+        username.className = 'post-entry-copy';
+        username.textContent = `Instagram: @${entry.username}`;
+        article.append(username);
+      }
+      if (entry.reelUrl) {
+        const reel = document.createElement('a');
+        reel.className = 'reel-link';
+        reel.href = entry.reelUrl;
+        reel.target = '_blank';
+        reel.rel = 'noopener noreferrer';
+        reel.textContent = 'Open Reel ↗';
+        article.append(reel);
+      }
       const copy = document.createElement('p');
       copy.className = 'post-entry-copy';
       copy.textContent = entry.post;

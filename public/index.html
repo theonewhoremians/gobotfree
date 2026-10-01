@@ -63,14 +63,19 @@
         <section class="postup-section" id="post-up" aria-labelledby="postup-title">
           <div class="postup-copy">
             <h2 id="postup-title">Post up<span>.</span></h2>
+            <p>Share your handle, public Reel, and post copy. We’ll send the details to the private queue.</p>
           </div>
           <form class="post-card" id="post-form">
             <div class="form-topline"><span>NEW POST</span></div>
+            <label for="post-username">Instagram username</label>
+            <input class="post-input" id="post-username" name="username" type="text" autocomplete="username" placeholder="yourhandle" maxlength="30" pattern="[A-Za-z0-9._]+" required />
+            <label for="post-reel-url">Your Reel link</label>
+            <input class="post-input" id="post-reel-url" name="reelUrl" type="url" inputmode="url" placeholder="https://instagram.com/reel/..." maxlength="500" required />
             <label for="post-text">Your post</label>
             <textarea class="post-input post-textarea" id="post-text" name="post" minlength="1" maxlength="800" placeholder="Write something…" required></textarea>
             <button class="submit-button" type="submit"><span>Send post</span><span aria-hidden="true">↗</span></button>
             <p class="form-status" id="post-status" role="status" aria-live="polite"></p>
-            <p class="form-footnote">Posts are sent to the private post queue.</p>
+            <p class="form-footnote">Your handle, Reel link, and post appear in the private queue.</p>
           </form>
         </section>
       </main>

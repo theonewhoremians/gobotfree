@@ -48,6 +48,8 @@ postForm.addEventListener('submit', async (event) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        username: postForm.elements.username.value,
+        reelUrl: postForm.elements.reelUrl.value,
         post: postForm.elements.post.value,
       }),
     });

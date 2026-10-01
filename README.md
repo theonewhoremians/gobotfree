@@ -14,13 +14,13 @@ node server.js
 
 Open `http://localhost:3000`. The admin panel is at `http://localhost:3000/head`; the browser will show its built-in username/password prompt. The prompt protects the dashboard and its data API.
 
-When running locally, requests and posts are stored in `data/submissions.json` and `data/posts.json`, excluded from Git. Posts are limited to 800 characters.
+When running locally, requests and posts are stored in `data/submissions.json` and `data/posts.json`, excluded from Git. Posts include an Instagram handle, public Reel link, and up to 800 characters of post text.
 
 ## Free hosted admin panel
 
 The live backend uses Vercel Functions and a Neon database so saved entries persist between deployments. Create a Neon project on its Free plan, then:
 
-1. In Neon, open **SQL Editor**, paste the contents of `neon/schema.sql`, and run it. This creates the two tables for Reel requests and posts.
+1. In Neon, open **SQL Editor**, paste the contents of `neon/schema.sql`, and run it. It creates the Reel request and post tables; re-running it safely adds the username and Reel link columns to an existing post table.
 2. In Neon, copy the pooled connection string from **Connect**. It starts with `postgresql://` and includes your database password; keep it secret.
 3. In Vercel, open the `gobotfree` project and add these environment variables for **Production** (and Preview too if you want preview deployments to work):
 

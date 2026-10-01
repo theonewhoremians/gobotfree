@@ -143,11 +143,12 @@ function cleanSubmission(input) {
 function cleanPost(input) {
   if (!input || typeof input !== 'object' || Array.isArray(input)) return null;
   const keys = Object.keys(input);
-  if (keys.length !== 1 || !keys.includes('post')) return null;
+  if (keys.length !== 3 || !keys.includes('post') || !keys.includes('username') || !keys.includes('reelUrl')) return null;
+  const identity = cleanSubmission({ username: input.username, reelUrl: input.reelUrl });
 
   const post = typeof input.post === 'string' ? input.post.trim() : '';
-  if (!post.length || post.length > 800) return null;
-  return { post };
+  if (!identity || !post.length || post.length > 800) return null;
+  return { ...identity, post };
 }
 
 let saveQueue = Promise.resolve();
@@ -201,10 +202,10 @@ const server = http.createServer(async (req, res) => {
     try {
       const input = await readJson(req, 12000);
       const clean = cleanPost(input);
-      if (!clean) return sendJson(res, 400, { error: 'Write a post of up to 800 characters.' });
+      if (!clean) return sendJson(res, 400, { error: 'Enter a valid Instagram username and Reel URL, plus a post of up to 800 characters.' });
       const item = { id: crypto.randomUUID(), ...clean, createdAt: new Date().toISOString() };
       await saveEntry(POSTS_FILE, item);
-      const notificationSent = await sendTelegramNotification(`New Post\n${item.post}`);
+      const notificationSent = await sendTelegramNotification(`New Post\nInstagram: @${item.username}\nReel: ${item.reelUrl}\n\nPost:\n${item.post}`);
       return sendJson(res, 201, { ok: true, notificationSent });
     } catch (error) {
       if (!res.destroyed && !res.headersSent) sendJson(res, error.status || 500, { error: error.status ? error.message : 'Could not save your post. Please try again.' });
