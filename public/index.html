@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#171b19" />
+    <meta name="description" content="A calmer, human-first way to bring more eyes to your Instagram Reels. No bots. No password sharing." />
+    <title>Go Bot Free — Keep your growth human</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Go Bot Free home">
+          <span class="brand-name">go bot <b>free</b></span>
+        </a>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <h1 id="hero-title">Good content<br />deserves a <em>real</em><br /><span>audience.</span></h1>
+            <p class="hero-intro">We’re building a more human way to support creators. Share a Reel to join the early access queue and keep your account in your own hands.</p>
+            <a class="primary-button" href="#submit">Share your Reel <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="hero-art">
+            <div class="art-glow" aria-hidden="true"></div>
+            <img class="hero-visual" src="/reel-orbit-3d.png" alt="A sculptural 3D Reel frame orbiting in a muted green and coral scene" />
+            <div class="floating-tag"><span>↗</span> real people, real reach</div>
+            <span class="art-index">01 / ORGANIC BY NATURE</span>
+          </div>
+          <div class="scroll-cue"><span></span> Scroll to get started</div>
+        </section>
+
+        <section class="manifesto" aria-label="Our approach">
+          <div class="manifesto-kicker">THE GO BOT FREE WAY</div>
+          <div class="manifesto-copy"><h2>Less automation.<br /><span>More actual connection.</span></h2><p>We’re shaping a creator-first, bot-free service. Send your handle and Reel to join the early access queue.</p></div>
+          <div class="principles">
+            <article><span class="principle-number">01</span><h3>Stay in control</h3><p>Your account stays yours. We never need your password.</p></article>
+            <article><span class="principle-number">02</span><h3>Keep it human</h3><p>No fake followers or automated likes. People first, always.</p></article>
+            <article><span class="principle-number">03</span><h3>Start simple</h3><p>One handle and one public Reel link is all we need.</p></article>
+          </div>
+        </section>
+
+        <section class="submit-section" id="submit" aria-labelledby="submit-title">
+          <div class="submit-intro"><h2 id="submit-title">Join the<br /><em>early list.</em></h2><p>Send your handle and a public Reel link to join the post queue. Telegram alerts are planned for a later update.</p></div>
+          <form class="request-card" id="request-form">
+            <div class="form-topline"><span>REEL REQUEST</span></div>
+            <label for="username">Instagram username <span>01</span></label>
+            <div class="input-wrap"><span class="input-prefix">@</span><input id="username" name="username" type="text" autocomplete="username" placeholder="yourhandle" maxlength="30" pattern="[A-Za-z0-9._]+" required /></div>
+            <label for="reel-url">Your Reel link <span>02</span></label>
+            <div class="input-wrap"><span class="input-prefix link-prefix">↗</span><input id="reel-url" name="reelUrl" type="url" inputmode="url" placeholder="instagram.com/reel/..." maxlength="500" required /></div>
+            <button class="submit-button" type="submit"><span>Send my Reel</span><span aria-hidden="true">↗</span></button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+            <p class="form-footnote">Your handle and Reel link will be saved in the request list.</p>
+          </form>
+        </section>
+
+        <section class="postup-section" id="post-up" aria-labelledby="postup-title">
+          <div class="postup-copy">
+            <h2 id="postup-title">Post up<span>.</span></h2>
+          </div>
+          <form class="post-card" id="post-form">
+            <div class="form-topline"><span>NEW POST</span></div>
+            <label for="post-text">Your post</label>
+            <textarea class="post-input post-textarea" id="post-text" name="post" minlength="1" maxlength="800" placeholder="Write something…" required></textarea>
+            <button class="submit-button" type="submit"><span>Send post</span><span aria-hidden="true">↗</span></button>
+            <p class="form-status" id="post-status" role="status" aria-live="polite"></p>
+            <p class="form-footnote">Posts are sent to the private post queue.</p>
+          </form>
+        </section>
+      </main>
+
+      <footer class="footer"><a class="brand footer-brand" href="/"><span class="brand-name">go bot <b>free</b></span></a><span>Made for the real ones. © 2026</span><a href="#submit">Back to the top ↑</a></footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#171b19" />
+    <title>Requests — Go Bot Free</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/head.js" defer></script>
+  </head>
+  <body class="admin-body">
+    <div class="site-shell admin-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Go Bot Free home"><span class="brand-name">go bot <b>free</b></span></a>
+        <span class="admin-badge"><span class="live-dot"></span> PRIVATE ADMIN</span>
+      </header>
+      <main class="admin-main">
+        <div class="eyebrow"><span class="live-dot"></span> Your inbox, minus the noise</div>
+        <div class="admin-heading"><div><h1>Reel requests<span>.</span></h1><p>Handles and links people shared with us.</p></div><button class="refresh-button" id="refresh-button" type="button"><span aria-hidden="true">↻</span> Refresh</button></div>
+        <div class="admin-stats"><div><span>REQUESTS</span><b id="request-count">—</b></div><div><span>ACCOUNT ACCESS</span><b class="safe-stat">NOT COLLECTED</b></div><div><span>LAST CHECKED</span><b id="last-checked">—</b></div></div>
+        <div class="table-wrap"><table><thead><tr><th>INSTAGRAM</th><th>REEL</th><th>RECEIVED</th></tr></thead><tbody id="request-rows"><tr><td colspan="3" class="empty-state">Loading requests…</td></tr></tbody></table></div>
+        <p class="admin-note"><span>✳</span> Only handles and public Reel links are saved. No account passwords are collected.</p>
+        <section class="admin-posts" aria-labelledby="admin-posts-title">
+          <div class="admin-posts-heading"><div><div class="eyebrow"><span class="live-dot"></span> POST QUEUE</div><h2 id="admin-posts-title">Post up <span id="post-count">—</span></h2></div></div>
+          <div class="post-list" id="post-list"><p class="empty-state">Loading posts…</p></div>
+        </section>
+      </main>
+      <footer class="footer"><a class="brand footer-brand" href="/"><span class="brand-name">go bot <b>free</b></span></a><span>Keep it human.</span><a href="/">View website ↗</a></footer>
+    </div>
+  </body>
+</html>
