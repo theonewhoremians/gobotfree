@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/head", "destination": "/api/head" }
+  ],
+  "functions": {
+    "api/*.mjs": {
+      "includeFiles": "public/head.html",
+      "maxDuration": 30
+    }
+  }
+}
