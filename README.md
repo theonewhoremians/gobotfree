@@ -1,6 +1,6 @@
 # Go Bot Free
 
-A small website for collecting Instagram handles, public Reel links, and short text posts. It does not request or store Instagram passwords. The hosted site uses Vercel Functions and Supabase Postgres; no paid add-ons or packages are required for a small personal project.
+A small website for collecting Instagram handles, public Reel links, and short text posts. It does not request or store Instagram passwords. The hosted site uses Vercel Functions and Neon Postgres; no paid add-ons are required for a small personal project.
 
 ## Run locally
 
@@ -18,23 +18,22 @@ When running locally, requests and posts are stored in `data/submissions.json` a
 
 ## Free hosted admin panel
 
-The live backend uses Vercel Functions and a Supabase database so saved entries persist between deployments. Create a Supabase project on its Free plan, then:
+The live backend uses Vercel Functions and a Neon database so saved entries persist between deployments. Create a Neon project on its Free plan, then:
 
-1. In Supabase, open **SQL Editor**, paste the contents of `supabase/schema.sql`, and run it. This creates the two private tables for Reel requests and posts.
-2. In Supabase **Project Settings → API Keys**, copy the **Project URL** and a **Secret key** (`sb_secret_...`). Do not use the publishable key in the server settings.
+1. In Neon, open **SQL Editor**, paste the contents of `neon/schema.sql`, and run it. This creates the two tables for Reel requests and posts.
+2. In Neon, copy the pooled connection string from **Connect**. It starts with `postgresql://` and includes your database password; keep it secret.
 3. In Vercel, open the `gobotfree` project and add these environment variables for **Production** (and Preview too if you want preview deployments to work):
 
    - `ADMIN_USER` — the name for the `/head` prompt
    - `ADMIN_PASSWORD` — a long, unique password
-   - `SUPABASE_URL` — the Supabase Project URL
-   - `SUPABASE_SECRET_KEY` — the Supabase Secret key
+   - `DATABASE_URL` — the Neon connection string
    - `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` — optional; set these to receive Telegram alerts
 
 4. Redeploy the latest Vercel deployment. Then open `https://gobotfree.vercel.app/head` and use the admin username and password. Each saved Reel request or post appears in the panel; a Telegram alert is sent when the Telegram values are configured.
 
-The Supabase Secret key bypasses database row policies, so it must stay in Vercel environment settings and never be put in browser code or GitHub. The SQL keeps direct `anon` and `authenticated` table access revoked; only the server function uses the secret key.
+The database connection string grants direct database access, so keep it in Vercel environment settings and never put it in browser code or GitHub.
 
-Free plans have limits: Supabase Free currently includes 500 MB of database space and may pause projects after a week of inactivity. Vercel Hobby includes Functions within its usage limits and is intended for personal projects. If a Supabase project pauses, resume it in Supabase before submissions can be saved again.
+Neon's Free plan has limits on compute, storage, and data transfer. Its compute scales to zero while idle and starts when needed. Vercel Hobby includes Functions within its usage limits and is intended for personal projects.
 
 ## Telegram notifications
 

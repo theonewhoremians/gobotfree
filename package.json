@@ -1,0 +1,7 @@
+{
+  "name": "go-bot-free",
+  "private": true,
+  "dependencies": {
+    "@neondatabase/serverless": "1.1.0"
+  }
+}

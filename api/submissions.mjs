@@ -5,7 +5,7 @@ export default {
     if (request.method === 'GET') {
       if (!isAdmin(request)) return unauthorized();
       try {
-        const entries = await listEntries('submissions', 'id,username,reel_url,created_at');
+        const entries = await listEntries('submissions');
         return json(entries.map(({ id, username, reel_url, created_at }) => ({ id, username, reelUrl: reel_url, createdAt: created_at })));
       } catch (error) {
         return failure(error, 'Could not load requests.');

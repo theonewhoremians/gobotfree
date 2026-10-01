@@ -10,9 +10,3 @@ create table if not exists public.posts (
   post text not null check (char_length(post) between 1 and 800),
   created_at timestamptz not null default now()
 );
-
-alter table public.submissions enable row level security;
-alter table public.posts enable row level security;
-
-revoke all on public.submissions, public.posts from anon, authenticated;
-grant all on public.submissions, public.posts to service_role;

@@ -5,7 +5,7 @@ export default {
     if (request.method === 'GET') {
       if (!isAdmin(request)) return unauthorized();
       try {
-        const entries = await listEntries('posts', 'id,post,created_at');
+        const entries = await listEntries('posts');
         return json(entries.map(({ id, post, created_at }) => ({ id, post, createdAt: created_at })));
       } catch (error) {
         return failure(error, 'Could not load posts.');
