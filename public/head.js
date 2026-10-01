@@ -24,7 +24,7 @@ async function loadRequests() {
     if (!entries.length) {
       const tr = document.createElement('tr');
       const td = cell('Nothing here yet. New requests will show up here.', 'empty-state');
-      td.colSpan = 3;
+      td.colSpan = 4;
       tr.append(td);
       rows.append(tr);
       return;
@@ -40,15 +40,16 @@ async function loadRequests() {
       reel.rel = 'noopener noreferrer';
       reel.textContent = 'Open Reel ↗';
       reelCell.append(reel);
+      const post = cell(entry.post || '—', 'post-cell');
       const received = cell(new Intl.DateTimeFormat(undefined, { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(entry.createdAt)), 'date-cell');
-      tr.append(username, reelCell, received);
+      tr.append(username, reelCell, post, received);
       rows.append(tr);
     }
   } catch (error) {
     rows.replaceChildren();
     const tr = document.createElement('tr');
     const td = cell(error.message, 'empty-state error');
-    td.colSpan = 3;
+    td.colSpan = 4;
     tr.append(td);
     rows.append(tr);
   } finally {

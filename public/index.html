@@ -54,28 +54,12 @@
             <div class="input-wrap"><span class="input-prefix">@</span><input id="username" name="username" type="text" autocomplete="username" placeholder="yourhandle" maxlength="30" pattern="[A-Za-z0-9._]+" required /></div>
             <label for="reel-url">Your Reel link <span>02</span></label>
             <div class="input-wrap"><span class="input-prefix link-prefix">↗</span><input id="reel-url" name="reelUrl" type="url" inputmode="url" placeholder="instagram.com/reel/..." maxlength="500" required /></div>
+            <label for="post-up">Post up <span>OPTIONAL · 03</span></label>
+            <textarea class="post-input post-textarea" id="post-up" name="post" rows="4" maxlength="800" placeholder="Share a quick review or note…" aria-describedby="post-up-hint"></textarea>
+            <p class="form-hint" id="post-up-hint">Your Post up will travel with your Reel request.</p>
             <button class="submit-button" type="submit"><span>Send my Reel</span><span aria-hidden="true">↗</span></button>
             <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-            <p class="form-footnote">Your handle and Reel link will be saved in the request list.</p>
-          </form>
-        </section>
-
-        <section class="postup-section" id="post-up" aria-labelledby="postup-title">
-          <div class="postup-copy">
-            <h2 id="postup-title">Post up<span>.</span></h2>
-            <p>Share your handle, public Reel, and post copy. We’ll send the details to the private queue.</p>
-          </div>
-          <form class="post-card" id="post-form">
-            <div class="form-topline"><span>NEW POST</span></div>
-            <label for="post-username">Instagram username</label>
-            <input class="post-input" id="post-username" name="username" type="text" autocomplete="username" placeholder="yourhandle" maxlength="30" pattern="[A-Za-z0-9._]+" required />
-            <label for="post-reel-url">Your Reel link</label>
-            <input class="post-input" id="post-reel-url" name="reelUrl" type="url" inputmode="url" placeholder="https://instagram.com/reel/..." maxlength="500" required />
-            <label for="post-text">Your post</label>
-            <textarea class="post-input post-textarea" id="post-text" name="post" minlength="1" maxlength="800" placeholder="Write something…" required></textarea>
-            <button class="submit-button" type="submit"><span>Send post</span><span aria-hidden="true">↗</span></button>
-            <p class="form-status" id="post-status" role="status" aria-live="polite"></p>
-            <p class="form-footnote">Your handle, Reel link, and post appear in the private queue.</p>
+            <p class="form-footnote">Your handle, Reel link, and optional Post up will be saved.</p>
           </form>
         </section>
       </main>

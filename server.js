@@ -123,11 +123,13 @@ function readJson(req, maxBytes = 8192) {
 function cleanSubmission(input) {
   if (!input || typeof input !== 'object' || Array.isArray(input)) return null;
   const keys = Object.keys(input);
-  if (keys.length !== 2 || !keys.includes('username') || !keys.includes('reelUrl')) return null;
+  if (keys.length < 2 || keys.length > 3 || !keys.includes('username') || !keys.includes('reelUrl') || keys.some((key) => !['username', 'reelUrl', 'post'].includes(key))) return null;
+  if (keys.includes('post') && typeof input.post !== 'string') return null;
 
   const username = typeof input.username === 'string' ? input.username.trim().replace(/^@/, '') : '';
   const reelUrl = typeof input.reelUrl === 'string' ? input.reelUrl.trim() : '';
-  if (!/^[a-zA-Z0-9._]{1,30}$/.test(username) || reelUrl.length > 500) return null;
+  const post = typeof input.post === 'string' ? input.post.trim() : '';
+  if (!/^[a-zA-Z0-9._]{1,30}$/.test(username) || reelUrl.length > 500 || post.length > 800) return null;
 
   let parsed;
   try {
@@ -137,7 +139,7 @@ function cleanSubmission(input) {
   }
   const allowedHosts = new Set(['instagram.com', 'www.instagram.com', 'm.instagram.com']);
   if (!allowedHosts.has(parsed.hostname.toLowerCase()) || !/^\/(reel|reels)\/[\w-]+\/?$/i.test(parsed.pathname)) return null;
-  return { username, reelUrl: parsed.toString() };
+  return { username, reelUrl: parsed.toString(), post: post || null };
 }
 
 function cleanPost(input) {
@@ -148,7 +150,7 @@ function cleanPost(input) {
 
   const post = typeof input.post === 'string' ? input.post.trim() : '';
   if (!identity || !post.length || post.length > 800) return null;
-  return { ...identity, post };
+  return { username: identity.username, reelUrl: identity.reelUrl, post };
 }
 
 let saveQueue = Promise.resolve();
@@ -190,7 +192,8 @@ const server = http.createServer(async (req, res) => {
       if (!clean) return sendJson(res, 400, { error: 'Enter a valid Instagram username and Reel URL.' });
       const item = { id: crypto.randomUUID(), ...clean, createdAt: new Date().toISOString() };
       await saveEntry(DATA_FILE, item);
-      const notificationSent = await sendTelegramNotification(`New Reel request\nInstagram: @${item.username}\nReel: ${item.reelUrl}`);
+      const postNote = item.post ? `\n\nPost up:\n${item.post}` : '';
+      const notificationSent = await sendTelegramNotification(`New Reel request\nInstagram: @${item.username}\nReel: ${item.reelUrl}${postNote}`);
       return sendJson(res, 201, { ok: true, notificationSent });
     } catch (error) {
       if (!res.destroyed && !res.headersSent) sendJson(res, error.status || 500, { error: error.status ? error.message : 'Could not save your request. Please try again.' });

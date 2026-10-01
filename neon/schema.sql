@@ -2,8 +2,11 @@ create table if not exists public.submissions (
   id uuid primary key default gen_random_uuid(),
   username text not null check (char_length(username) between 1 and 30),
   reel_url text not null check (char_length(reel_url) <= 500),
+  post text check (post is null or char_length(post) <= 800),
   created_at timestamptz not null default now()
 );
+
+alter table public.submissions add column if not exists post text check (post is null or char_length(post) <= 800);
 
 create table if not exists public.posts (
   id uuid primary key default gen_random_uuid(),

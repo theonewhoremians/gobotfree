@@ -6,7 +6,7 @@ export default {
       if (!isAdmin(request)) return unauthorized();
       try {
         const entries = await listEntries('submissions');
-        return json(entries.map(({ id, username, reel_url, created_at }) => ({ id, username, reelUrl: reel_url, createdAt: created_at })));
+        return json(entries.map(({ id, username, reel_url, post, created_at }) => ({ id, username, reelUrl: reel_url, post, createdAt: created_at })));
       } catch (error) {
         return failure(error, 'Could not load requests.');
       }
@@ -16,7 +16,8 @@ export default {
       const clean = cleanSubmission(await readJson(request));
       if (!clean) return json({ error: 'Enter a valid Instagram username and Reel URL.' }, 400);
       await insertEntry('submissions', clean);
-      const notificationSent = await sendTelegram(`New Reel request\nInstagram: @${clean.username}\nReel: ${clean.reel_url}`);
+      const postNote = clean.post ? `\n\nPost up:\n${clean.post}` : '';
+      const notificationSent = await sendTelegram(`New Reel request\nInstagram: @${clean.username}\nReel: ${clean.reel_url}${postNote}`);
       return json({ ok: true, notificationSent }, 201);
     } catch (error) {
       return failure(error, 'Could not save your request. Please try again.');
